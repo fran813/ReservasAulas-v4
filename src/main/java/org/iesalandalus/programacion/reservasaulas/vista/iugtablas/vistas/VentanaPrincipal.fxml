@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Salir" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Acerca de" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TitledPane animated="false">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="tfFiltrarNombre" focusTraversable="false" prefHeight="39.0" prefWidth="292.0" promptText="Filtrar por nombre..." />
+                        <TextField fx:id="tfFiltrarNombre1" focusTraversable="false" prefHeight="39.0" prefWidth="351.0" promptText="Filtrar por correo" />
+                        <TextField fx:id="tfFiltrarNombre2" focusTraversable="false" prefHeight="39.0" prefWidth="262.0" promptText="Filtrar por telefono" />
+                     </children>
+                  </HBox>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="279.0" text="Nombre" />
+                      <TableColumn minWidth="0.0" prefWidth="265.0" text="Correo" />
+                        <TableColumn minWidth="0.0" prefWidth="271.0" text="Telefono" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+         <graphic>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reserva de aulas" textAlignment="RIGHT" wrappingWidth="433.642578125" />
+         </graphic>
+      </TitledPane>
+   </children>
+</VBox>
