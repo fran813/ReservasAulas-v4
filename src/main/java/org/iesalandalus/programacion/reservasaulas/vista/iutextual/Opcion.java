@@ -1,4 +1,6 @@
-package org.iesalandalus.programacion.reservasaulas.vista;
+package org.iesalandalus.programacion.reservasaulas.vista.iutextual;
+
+import org.iesalandalus.programacion.reservasaulas.vista.IVistaReservasAulas;
 
 public enum Opcion {
 
