@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.reservasaulas.vista.iugrafica.controladore
 
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
-import org.iesalandalus.programacion.reservasaulas.vista.iugtablas.utilidades.Dialogos;
+import org.iesalandalus.programacion.reservasaulas.vista.iugrafica.utilidades.Dialogos;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
