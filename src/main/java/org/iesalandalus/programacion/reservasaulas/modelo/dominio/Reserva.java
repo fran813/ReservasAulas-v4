@@ -7,6 +7,10 @@ import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Pe
 
 public class Reserva implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8641245089219529144L;
 	private Profesor profesor;
 	private Aula aula;
 	private Permanencia permanencia;
