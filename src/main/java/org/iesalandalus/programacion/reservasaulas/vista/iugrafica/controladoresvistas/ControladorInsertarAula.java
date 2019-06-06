@@ -1,5 +1,8 @@
 package org.iesalandalus.programacion.reservasaulas.vista.iugrafica.controladoresvistas;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.vista.iugrafica.utilidades.Dialogos;
@@ -7,11 +10,12 @@ import org.iesalandalus.programacion.reservasaulas.vista.iugrafica.utilidades.Di
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControladorInsertarAula {
+public class ControladorInsertarAula implements Initializable{
 
 	private static final String ER_OBLIGATORIO = ".+";
 	private static final String ER_PUESTOS = "\\d{5}";
@@ -19,20 +23,11 @@ public class ControladorInsertarAula {
 	private IControladorReservasAulas controladorMVC;
 	private ObservableList<Aula> aulas;
 
-	@FXML
-	private TextField tfNombre;
-	@FXML
-	private Button btInsertar;
-	@FXML
-	private TextField tfPuestos;
-	@FXML
-	private Button btCancelar;
+	@FXML private TextField tfNombre;
+	@FXML private TextField tfPuestos;
+	@FXML private Button btInsertar;
+	@FXML private Button btCancelar;
 	
-	@FXML
-	private void initialize() {
-		tfNombre.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfNombre));
-		tfPuestos.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_PUESTOS, tfPuestos));
-	}
 
 	public void setControladorMVC(IControladorReservasAulas controladorMVC) {
 		this.controladorMVC = controladorMVC;
@@ -46,7 +41,13 @@ public class ControladorInsertarAula {
 		tfNombre.setText("");
 		tfPuestos.setText("");
 	}
-
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		tfNombre.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfNombre));
+		tfPuestos.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_PUESTOS, tfPuestos));
+	}
+	
 	private void compruebaCampoTexto(String er, TextField campoTexto) {
 		String texto = campoTexto.getText();
 		if (texto.matches(er)) {
@@ -57,12 +58,12 @@ public class ControladorInsertarAula {
 	}
 
 	@FXML
-	void cancelar(ActionEvent event) {
+	private void cancelar(ActionEvent event) {
 		((Stage) btCancelar.getScene().getWindow()).close();
 	}
 
 	@FXML
-	void insertarAula(ActionEvent event) {
+	private void insertarAula(ActionEvent event) {
 		Aula aula = null;
 		try {
 			aula = new Aula(tfNombre.getText(), Integer.parseInt(tfPuestos.getText()));
@@ -74,4 +75,6 @@ public class ControladorInsertarAula {
 			Dialogos.mostrarDialogoError("Insertar Aula", e.getMessage());
 		}
 	}
+
+	
 }

@@ -124,7 +124,7 @@ public class VistaReservasAulas implements IVistaReservasAulas {
 			profesor = Consola.leerProfesor();
 			profesor = controlador.buscarProfesor(profesor);
 			if (profesor != null) {
-				System.out.println("El aula buscada es: " + profesor);
+				System.out.println("El Profesor buscado es: " + profesor);
 			} else {
 				System.out.println("No existe ningún profesor con ese nombre.");
 			}

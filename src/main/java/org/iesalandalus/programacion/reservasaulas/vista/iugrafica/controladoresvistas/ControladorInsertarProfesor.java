@@ -1,5 +1,8 @@
 package org.iesalandalus.programacion.reservasaulas.vista.iugrafica.controladoresvistas;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.vista.iugrafica.utilidades.Dialogos;
@@ -7,11 +10,12 @@ import org.iesalandalus.programacion.reservasaulas.vista.iugrafica.utilidades.Di
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControladorInsertarProfesor {
+public class ControladorInsertarProfesor implements Initializable {
 
 	private static final String ER_OBLIGATORIO = ".+";
 	private static final String ER_TELEFONO = "950[0-9]{6}|[679][0-9] {8}";
@@ -31,8 +35,8 @@ public class ControladorInsertarProfesor {
 	@FXML
 	private Button btCancelar;
 
-	@FXML
-	private void initialize() {
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		tfNombre.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfNombre));
 		tfTelefono.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_TELEFONO, tfTelefono));
 		tfCorreo.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_CORREO, tfCorreo));
@@ -62,12 +66,12 @@ public class ControladorInsertarProfesor {
 	}
 
 	@FXML
-	void cancelar(ActionEvent event) {
+	private void cancelar(ActionEvent event) {
 		((Stage) btCancelar.getScene().getWindow()).close();
 	}
 
 	@FXML
-	void insertarProfesor(ActionEvent event) {
+	private void insertarProfesor(ActionEvent event) {
 		Profesor profesor = null;
 		try {
 			if (tfTelefono.getText().equals(""))
@@ -82,4 +86,6 @@ public class ControladorInsertarProfesor {
 			Dialogos.mostrarDialogoError("Insertar Profesor", e.getMessage());
 		}
 	}
+
+	
 }

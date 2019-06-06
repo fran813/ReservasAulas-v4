@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -7,46 +8,124 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="1239.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.vista.iugrafica.controladoresvistas.ControladorVentanaPrincipal">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Archivo">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Salir" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ayuda">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Acerca de" />
-            </items>
-          </Menu>
-        </menus>
+      <Text fill="#0e41cf" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserva de aulas" textAlignment="CENTER" wrappingWidth="1142.642578125">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Text>
+      <MenuBar prefHeight="14.0" prefWidth="897.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Archivo">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ayuda">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <TitledPane animated="false">
-         <content>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="41.0" prefWidth="1144.0">
+         <children>
+            <TextField fx:id="tfFiltrarNombre" focusTraversable="false" prefHeight="39.0" prefWidth="345.0" promptText="Filtrar por nombre..." />
+            <TextField fx:id="tfFiltrarCorreo" focusTraversable="false" prefHeight="39.0" prefWidth="451.0" promptText="Filtrar por correo" />
+            <TextField fx:id="tfFiltrarTelefono" focusTraversable="false" prefHeight="39.0" prefWidth="446.0" promptText="Filtrar por telefono" />
+         </children>
+      </HBox>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Profesores">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="1239.0">
                      <children>
-                        <TextField fx:id="tfFiltrarNombre" focusTraversable="false" prefHeight="39.0" prefWidth="292.0" promptText="Filtrar por nombre..." />
-                        <TextField fx:id="tfFiltrarNombre1" focusTraversable="false" prefHeight="39.0" prefWidth="351.0" promptText="Filtrar por correo" />
-                        <TextField fx:id="tfFiltrarNombre2" focusTraversable="false" prefHeight="39.0" prefWidth="262.0" promptText="Filtrar por telefono" />
+                        <VBox prefHeight="172.0" prefWidth="1239.0">
+                           <children>
+                              <TableView fx:id="tvProfesores" prefHeight="178.0" prefWidth="1239.0">
+                                 <columns>
+                                    <TableColumn fx:id="tcProfesor1" prefWidth="200.0" text="Profesor" />
+                                    <TableColumn fx:id="tcCorreo1" minWidth="0.0" prefWidth="180.0" text="Correo" />
+                                    <TableColumn fx:id="tcTelefono1" minWidth="0.0" prefWidth="210.0" text="Telefono" />
+                                    <TableColumn fx:id="tcAula1" prefWidth="222.0" text="Aula" />
+                                    <TableColumn fx:id="tcDia1" prefWidth="125.0" text="Dia" />
+                                    <TableColumn fx:id="tcTramoHora1" minWidth="0.0" prefWidth="128.0" text="Tramo/Hora" />
+                                    <TableColumn fx:id="tcPuntos1" prefWidth="260.0" text="Puntos" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu fx:id="cmProfesores">
+                                       <items>
+                                          <MenuItem fx:id="miAnadirProfesor" mnemonicParsing="false" onAction="#anadirProfesor" text="Anadir Profesor" />
+                                          <MenuItem fx:id="miBorrarProfesor" mnemonicParsing="false" onAction="#borrarProfesor" text="Borrar Profesor" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </children></VBox>
                      </children>
-                  </HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="279.0" text="Nombre" />
-                      <TableColumn minWidth="0.0" prefWidth="265.0" text="Correo" />
-                        <TableColumn minWidth="0.0" prefWidth="271.0" text="Telefono" />
-                    </columns>
-                  </TableView>
-               </children>
-            </VBox>
-         </content>
-         <graphic>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reserva de aulas" textAlignment="RIGHT" wrappingWidth="433.642578125" />
-         </graphic>
-      </TitledPane>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Aulas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="310.0" prefWidth="1239.0">
+                           <children>
+                              <TableView fx:id="tvAulas" prefHeight="318.0" prefWidth="1175.0">
+                                 <columns>
+                                    <TableColumn fx:id="tcAula2" prefWidth="200.0" text="Aula" />
+                                    <TableColumn fx:id="tcPuestos2" minWidth="0.0" prefWidth="180.0" text="Puestos" />
+                                    <TableColumn fx:id="tcProfesor2" minWidth="0.0" prefWidth="210.0" text="Profesor" />
+                                    <TableColumn fx:id="tcPuntos2" prefWidth="222.0" text="Puntos" />
+                                    <TableColumn fx:id="tcDia2" prefWidth="178.0" text="Dia" />
+                                    <TableColumn fx:id="tcTramoHora2" prefWidth="113.0" text="Tramo/Hora" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu fx:id="cmAulas">
+                                       <items>
+                                          <MenuItem fx:id="miAnadirAula" mnemonicParsing="false" onAction="#anadirAula" text="Anadir Aula" />
+                                          <MenuItem fx:id="miBorrarAula" mnemonicParsing="false" onAction="#borrarAula" text="Borrar Aula" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Reservas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="310.0" prefWidth="1239.0">
+                           <children>
+                              <TableView fx:id="tvReservas" prefHeight="320.0" prefWidth="1205.0">
+                                 <columns>
+                                    <TableColumn fx:id="tcProfesor3" prefWidth="200.0" text="Profesor" />
+                                    <TableColumn fx:id="tcAula3" prefWidth="222.0" text="Aula" />
+                                    <TableColumn fx:id="tcDia3" prefWidth="125.0" text="Dia" />
+                                    <TableColumn fx:id="tcTramoHora3" minWidth="0.0" prefWidth="128.0" text="Tramo/Hora" />
+                                    <TableColumn fx:id="tcPuntos3" prefWidth="260.0" text="Puntos" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu fx:id="cmReservas">
+                                       <items>
+                                          <MenuItem fx:id="miAnadirReserva" mnemonicParsing="false" onAction="#anadirReserva" text="Anadir Reserva" />
+                                          <MenuItem fx:id="miBorrarReserva" mnemonicParsing="false" onAction="#borrarReserva" text="Borrar Reserva" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </children>
 </VBox>
