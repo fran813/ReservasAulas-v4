@@ -73,7 +73,5 @@ public class ControladorInsertarAula implements Initializable{
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError("Insertar Aula", e.getMessage());
 		}
-	}
-
-	
+	}	
 }

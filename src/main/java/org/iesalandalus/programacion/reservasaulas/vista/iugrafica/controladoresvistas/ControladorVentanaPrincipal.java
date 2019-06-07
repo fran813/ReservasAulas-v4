@@ -324,5 +324,4 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Borrar reserva", e.getMessage());
 		}
     }
-
 }
