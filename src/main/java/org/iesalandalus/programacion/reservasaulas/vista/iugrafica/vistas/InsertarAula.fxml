@@ -19,8 +19,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="166.0" text="Nombre" />
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="157.0" text="Puestos" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Nombre" />
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Puestos" GridPane.rowIndex="1" />
             <TextField fx:id="tfNombre" GridPane.columnIndex="1" />
             <TextField fx:id="tfPuestos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>

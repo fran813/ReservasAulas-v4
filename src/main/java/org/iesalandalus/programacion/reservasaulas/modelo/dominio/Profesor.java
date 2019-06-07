@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Profesor implements Serializable {
 
 	private static final long serialVersionUID = 8003013761880473541L;
-	private static final String ER_TELEFONO = "950[0-9]{6}|[679][0-9] {8}";
+	private static final String ER_TELEFONO = "[9][0-9]{8}|[6][0-9]{8}|[7][0-9]{8}";
 	private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
 	private String nombre;
 	private String correo;

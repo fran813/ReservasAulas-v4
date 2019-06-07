@@ -36,7 +36,7 @@
             <TextField fx:id="tfFiltrarTelefono" focusTraversable="false" prefHeight="39.0" prefWidth="446.0" promptText="Filtrar por telefono" />
          </children>
       </HBox>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="327.0" prefWidth="1239.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Profesores">
                <content>
@@ -44,15 +44,11 @@
                      <children>
                         <VBox prefHeight="172.0" prefWidth="1239.0">
                            <children>
-                              <TableView fx:id="tvProfesores" prefHeight="178.0" prefWidth="1239.0">
+                              <TableView fx:id="tvProfesores" prefHeight="162.0" prefWidth="1239.0">
                                  <columns>
                                     <TableColumn fx:id="tcProfesor1" prefWidth="200.0" text="Profesor" />
                                     <TableColumn fx:id="tcCorreo1" minWidth="0.0" prefWidth="180.0" text="Correo" />
                                     <TableColumn fx:id="tcTelefono1" minWidth="0.0" prefWidth="210.0" text="Telefono" />
-                                    <TableColumn fx:id="tcAula1" prefWidth="222.0" text="Aula" />
-                                    <TableColumn fx:id="tcDia1" prefWidth="125.0" text="Dia" />
-                                    <TableColumn fx:id="tcTramoHora1" minWidth="0.0" prefWidth="128.0" text="Tramo/Hora" />
-                                    <TableColumn fx:id="tcPuntos1" prefWidth="260.0" text="Puntos" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu fx:id="cmProfesores">
@@ -74,14 +70,10 @@
                      <children>
                         <VBox prefHeight="310.0" prefWidth="1239.0">
                            <children>
-                              <TableView fx:id="tvAulas" prefHeight="318.0" prefWidth="1175.0">
+                              <TableView fx:id="tvAulas" prefHeight="162.0" prefWidth="1239.0">
                                  <columns>
                                     <TableColumn fx:id="tcAula2" prefWidth="200.0" text="Aula" />
                                     <TableColumn fx:id="tcPuestos2" minWidth="0.0" prefWidth="180.0" text="Puestos" />
-                                    <TableColumn fx:id="tcProfesor2" minWidth="0.0" prefWidth="210.0" text="Profesor" />
-                                    <TableColumn fx:id="tcPuntos2" prefWidth="222.0" text="Puntos" />
-                                    <TableColumn fx:id="tcDia2" prefWidth="178.0" text="Dia" />
-                                    <TableColumn fx:id="tcTramoHora2" prefWidth="113.0" text="Tramo/Hora" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu fx:id="cmAulas">
@@ -103,13 +95,14 @@
                      <children>
                         <VBox prefHeight="310.0" prefWidth="1239.0">
                            <children>
-                              <TableView fx:id="tvReservas" prefHeight="320.0" prefWidth="1205.0">
+                              <TableView fx:id="tvReservas" prefHeight="162.0" prefWidth="1239.0">
                                  <columns>
                                     <TableColumn fx:id="tcProfesor3" prefWidth="200.0" text="Profesor" />
                                     <TableColumn fx:id="tcAula3" prefWidth="222.0" text="Aula" />
                                     <TableColumn fx:id="tcDia3" prefWidth="125.0" text="Dia" />
                                     <TableColumn fx:id="tcTramoHora3" minWidth="0.0" prefWidth="128.0" text="Tramo/Hora" />
                                     <TableColumn fx:id="tcPuntos3" prefWidth="260.0" text="Puntos" />
+                                    <TableColumn fx:id="tcCorreo3" prefWidth="260.0" text="Correo" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu fx:id="cmReservas">

@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 public class ControladorInsertarAula implements Initializable{
 
 	private static final String ER_OBLIGATORIO = ".+";
-	private static final String ER_PUESTOS = "\\d{5}";
 
 	private IControladorReservasAulas controladorMVC;
 	private ObservableList<Aula> aulas;
@@ -45,7 +44,7 @@ public class ControladorInsertarAula implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tfNombre.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfNombre));
-		tfPuestos.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_PUESTOS, tfPuestos));
+		tfPuestos.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfPuestos));
 	}
 	
 	private void compruebaCampoTexto(String er, TextField campoTexto) {

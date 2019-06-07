@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class PermanenciaPorHora extends Permanencia {
 
+	private static final long serialVersionUID = 1L;
 	private static final int PUNTOS = 3;
 	private static final int HORA_INICIO = 8;
 	private static final int HORA_FIN = 22;
@@ -52,7 +53,7 @@ public class PermanenciaPorHora extends Permanencia {
 			throw new IllegalArgumentException("La hora de una permanencia no puede ser nula.");
 		}
 
-		if (hora.getHour() > HORA_INICIO && hora.getHour() < HORA_FIN) {
+		if (hora.getHour() >= HORA_INICIO && hora.getHour() < HORA_FIN) {
 			if (hora.getMinute() == 0) {
 				this.hora = hora;
 			} else {
@@ -60,7 +61,7 @@ public class PermanenciaPorHora extends Permanencia {
 			}
 		} else {
 			throw new IllegalArgumentException(
-					"La hora de una permanencia debe estar comprendida entre las 8 y las 22.");
+					"La hora de una permanencia debe estar comprendida entre las 8:00 y las 22:00.");
 		}
 	}
 

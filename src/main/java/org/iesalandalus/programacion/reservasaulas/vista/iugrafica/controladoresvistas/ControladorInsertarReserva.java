@@ -13,6 +13,8 @@ import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.PermanenciaPorHora;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.PermanenciaPorTramo;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Tramo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,49 +22,47 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class ControladorInsertarReserva implements Initializable{
-
-	private static final String ER_OBLIGATORIO = ".+";
-	private static final String ER_TELEFONO = "950[0-9]{6}|[679][0-9] {8}";
-	private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
+public class ControladorInsertarReserva implements Initializable {
 	
-	private IControladorReservasAulas controladorMVC;
-	private ObservableList<Reserva> reservas;
-	private ObservableList<Profesor> profesores;
-	private ObservableList<Aula> aulas;
-	private ObservableList<String> horas = FXCollections.observableArrayList("8:00","9:00","10:00","11:00",
-			"12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00");
-	private ObservableList<String> tramo = FXCollections.observableArrayList("Mañana","Tarde");
-	
-	@FXML private RadioButton rbTramo;
     @FXML private TextField tfAula;
+    @FXML private TextField tfProfesor;
+    @FXML private TextField tfCorreo;
+    @FXML private ComboBox<String> cbHora;
+    @FXML private RadioButton rbTramo;
     @FXML private DatePicker dpDia;
     @FXML private RadioButton rbHora;
-    @FXML private TextField tfHora;
     @FXML private Button btInsertar;
-    @FXML private TextField tfProfesor;
-    @FXML private ChoiceBox<String> cbTramo;
+    @FXML private ComboBox<String> cbTramo;
     @FXML private Button btCancelar;
+    @FXML private ToggleGroup tgReserva;
+
     
+    private static final String ER_OBLIGATORIO = ".+";
+    private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
     
-    @Override
+    private IControladorReservasAulas controladorMVC;
+	private ObservableList<Reserva> reservas;
+	private ObservableList<String> horas = FXCollections.observableArrayList("08:00","09:00","10:00","11:00",
+			"12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00");
+	private ObservableList<String> tramo = FXCollections.observableArrayList("Mañana","Tarde");
+
+
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		tfAula.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfAula));
-		tfHora.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfHora));
+		rbHora.setToggleGroup(tgReserva);
+		rbTramo.setToggleGroup(tgReserva);
 		tfProfesor.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_OBLIGATORIO, tfProfesor));
-		rbTramo.setVisible(false);
-		rbHora.setVisible(false);
-		dpDia.setValue(null);
-		cbTramo.setValue(null);
+		tfCorreo.textProperty().addListener((ob, ov, nv) -> compruebaCampoTexto(ER_CORREO, tfCorreo));
 	}
-    
-    public void setControladorMVC(IControladorReservasAulas controladorMVC) {
+	
+	public void setControladorMVC(IControladorReservasAulas controladorMVC) {
 		this.controladorMVC = controladorMVC;
 	}
 	
@@ -70,67 +70,77 @@ public class ControladorInsertarReserva implements Initializable{
 		this.reservas = reservas;
 	}
 	
-	public void setProfesor(ObservableList<Profesor> profesores) {
-		this.profesores = profesores;
-	}
-	
-	public void setAulas(ObservableList<Aula> aulas) {
-		this.aulas = aulas;
-	}
-	
 	public void inicializa() {
-		tfAula.setText("");
 		tfProfesor.setText("");
-		tfHora.setText("");
+		tfAula.setText("");
+		tfCorreo.setText("");
 		dpDia.setValue(null);
+		cbHora.setValue(null);
 		cbTramo.setValue(null);
-		rbTramo.setVisible(false);
-		rbHora.setVisible(false);
+		rbHora.setVisible(true);
+		rbTramo.setVisible(true);
 	}
-    
-	@FXML
-    private void insertarReserva(ActionEvent event) {
+	
+    @FXML
+    private void elegirPermanencia(ActionEvent event) {
+    if (rbHora.isSelected()) {
+    	cbHora.setDisable(false);
+    	cbTramo.setDisable(true);
+    	cbHora.setItems(horas);
+    	}else {
+    		cbHora.setDisable(true);
+    		cbTramo.setDisable(false);
+    		cbTramo.setItems(tramo);		
+    	}
+    }
+
+    @FXML
+	private void insertarReserva() {
 		Reserva reserva = null;
 		try {
 			reserva = getReserva();
 			controladorMVC.realizarReserva(reserva);
 			reservas.add(reserva);
 			Stage propietario =((Stage) btInsertar.getScene().getWindow());
-			Dialogos.mostrarDialogoInformacion("Reserva Añadida", "Reserva añadida satisfactoriamente", propietario);
+			Dialogos.mostrarDialogoInformacion("Añadir reserva", "Reserva añadida satisfactoriamente", propietario);
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError("Añadir reserva", e.getMessage());
 		}	
 	}
-	
-    @FXML
-	private void cancelar() {
-		((Stage) btCancelar.getScene().getWindow()).close();
-	}
-
-    
-	private void compruebaCampoTexto(String er, TextField campoTexto) {	
-		String texto = campoTexto.getText();
-		if (texto.matches(er)) {
-			campoTexto.setStyle("-fx-border-color: green");
-		}
-		else {
-			campoTexto.setStyle("-fx-border-color: red");
-		}
-	}
-	
-
-	private Reserva getReserva() {
-		Profesor profesor = new Profesor(tfProfesor.getText(), ER_OBLIGATORIO);
-		Aula aula = new Aula(tfAula.getText(), 100);
+    private Reserva getReserva() {
+    	Profesor profesor = new Profesor(tfProfesor.getText(), tfCorreo.getText());
+		Aula aula = new Aula(tfAula.getText(), 10);
+		//No se como hacerlo con los constructores que tenemos creados de antes para que coja los puestos de un
+		//aula creada ya que para realizar esto no es necesario tener el aula creada, se que esta mal ya que de esta manera estoy diciendo que todas las aulas tienen 10 puestos
 		Permanencia permanencia = getPermanenciaHoraTramo(dpDia.getValue());
 		return new Reserva(profesor,aula,permanencia);
 	}
-	
-	private Permanencia getPermanenciaHoraTramo(LocalDate value) {
-		// TODO Auto-generated method stub
-		return null;
+
+	private Permanencia getPermanenciaHoraTramo(LocalDate dia) {
+		//Para una Hora
+		if (rbHora.isSelected()) {
+			return new PermanenciaPorHora(dia, cbHora.getValue());
+		}
+		//Para un Tramo
+		if (cbTramo.getValue().equals("Mañana")) {
+			return new PermanenciaPorTramo(dia, Tramo.MANANA);
+		} else {
+			return new PermanenciaPorTramo(dia, Tramo.TARDE);
+		}
 	}
 
-	
-
+	private void compruebaCampoTexto(String er, TextField campoTexto) {
+		String texto = campoTexto.getText();
+		if (texto.matches(er)) {
+			campoTexto.setStyle("-fx-border-color: green");
+		} else {
+			campoTexto.setStyle("-fx-border-color: red");
+		}
+	}
+    
+    @FXML
+	private void cancelar(ActionEvent event) {
+		((Stage) btCancelar.getScene().getWindow()).close();
+	}
 }
+

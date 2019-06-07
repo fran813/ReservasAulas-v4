@@ -18,22 +18,17 @@ import javafx.stage.Stage;
 public class ControladorInsertarProfesor implements Initializable {
 
 	private static final String ER_OBLIGATORIO = ".+";
-	private static final String ER_TELEFONO = "950[0-9]{6}|[679][0-9] {8}";
+	private static final String ER_TELEFONO = "[9][0-9]{8}|[6][0-9]{8}|[7][0-9]{8}";
 	private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
 
 	private IControladorReservasAulas controladorMVC;
 	private ObservableList<Profesor> profesores;
 
-	@FXML
-	private TextField tfCorreo;
-	@FXML
-	private TextField tfNombre;
-	@FXML
-	private TextField tfTelefono;
-	@FXML
-	private Button btInsertar;
-	@FXML
-	private Button btCancelar;
+	@FXML private TextField tfCorreo;
+	@FXML private TextField tfNombre;
+	@FXML private TextField tfTelefono;
+	@FXML private Button btInsertar;
+	@FXML private Button btCancelar;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -72,20 +67,29 @@ public class ControladorInsertarProfesor implements Initializable {
 
 	@FXML
 	private void insertarProfesor(ActionEvent event) {
+	
 		Profesor profesor = null;
 		try {
-			if (tfTelefono.getText().equals(""))
-				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText());
-			else
-				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText(), tfTelefono.getText());
+			profesor = getProfesor();
 			controladorMVC.insertarProfesor(profesor);
 			profesores.add(profesor);
-			Stage propietario = ((Stage) btInsertar.getScene().getWindow());
-			Dialogos.mostrarDialogoInformacion("Insertar Profesor", "Profesor añadido satisfactoriamente", propietario);
+			Stage propietario =((Stage) btInsertar.getScene().getWindow());
+			Dialogos.mostrarDialogoInformacion("Añadir profesor", "Profesor añadido satisfactoriamente", propietario);
 		} catch (Exception e) {
-			Dialogos.mostrarDialogoError("Insertar Profesor", e.getMessage());
-		}
+			Dialogos.mostrarDialogoError("Añadir profesor", e.getMessage());
+		}	
 	}
 
-	
+	private Profesor getProfesor() {
+		if (tfTelefono != null) {
+			String nombre = tfNombre.getText();
+			String correo = tfCorreo.getText();
+			String telefono = tfTelefono.getText();
+			return new Profesor(nombre, correo, telefono);
+		} else {
+			String nombre = tfNombre.getText();
+			String correo = tfCorreo.getText();
+			return new Profesor(nombre, correo);
+		}
+	}	
 }

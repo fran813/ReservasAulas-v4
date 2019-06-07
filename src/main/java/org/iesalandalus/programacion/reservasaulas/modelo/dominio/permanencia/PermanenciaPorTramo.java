@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class PermanenciaPorTramo extends Permanencia {
 
+	private static final long serialVersionUID = 1L;
 	private static final int PUNTOS = 10;
 	private Tramo tramo;
 
